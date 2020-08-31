@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<!-- Head -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<!-- Define styles -->
+<style>
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    table, th, td {
+        border: 2px solid gray;
+    }
+
+    th, td {
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    .figure {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border: 5px solid gray;
+        padding: 10px;
+        width: 500px;
+    }
+
+    .figure-caption {
+        font-size: 20px;
+    }
+
+</style>
+
+<!-- Body -->
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+    </div>
+    
+    {% if mars %} <!-- To bypass error loading template when images unavailable -->
+
+    <!-- Latest Mars News -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Latest Mars News</h2>
+                <p style="font-weight: bold; font-size: 20px">{{ mars.news_title }}</p>
+                <p style="font-size: 17px">{{ mars.news_p }}</p>
+            </div>
+        </div>
+        <!-- Featured Mars Image -->
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <h2>Featured Mars Image</h2>
+                <img class="img-responsive" style="display:block; margin-left:auto; margin-right: auto; width:80%" src="{{ mars.featured_image_url }}" alt="Featured Mars Image">
+            </div>
+
+            <!-- Mars Facts -->
+            <div class="col-sm-12 col-md-4">
+                <h3 style="text-align:center"><span style="background:#96c4ffaf">Mars Facts</span></h3>
+                {{ mars.facts_html | safe }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Mars Hemispheres -->
+    <hr style="border:0px solid #96c4ffaf; border-top-width: 3px;">
+        <h2 class="text-center">Mars Hemispheres</h2>
+    <hr style="border:0px solid #96c4ffaf; border-top-width: 3px;">
+
+    <div class="container-fluid" style="max-width: 1200px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 text-center">
+                <figure class="figure">
+                    <img class="img-responsive" src="{{ mars.hemisphere_image_urls[0].img_url }}" alt="Mars Hemisphere 1">
+                    <figcaption class="figure-caption text-center">{{ mars.hemisphere_image_urls[0].title }}
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+                <figure class="figure">
+                    <img class="img-responsive" src="{{ mars.hemisphere_image_urls[1].img_url }}" alt="Mars Hemisphere 2">
+                    <figcaption class="figure-caption text-center">{{ mars.hemisphere_image_urls[1].title }}
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+                <figure class="figure">
+                    <img class="img-responsive" src="{{ mars.hemisphere_image_urls[2].img_url }}" alt="Mars Hemisphere 3">
+                    <figcaption class="figure-caption text-center">{{ mars.hemisphere_image_urls[2].title }}
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center">
+                <figure class="figure">
+                    <img class="img-responsive" src="{{ mars.hemisphere_image_urls[3].img_url }}" alt="Mars Hemisphere 4">
+                    <figcaption class="figure-caption text-center">{{ mars.hemisphere_image_urls[3].title }}
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <!--footer-->
+    <footer style="position:static; bottom:0px; text-align:center; background-color:grey; padding:15px; width:100%; color:white">
+        <div class="footer">
+            &copy; Copyright Alyssa Ma 2020
+        </div>
+    </footer>
+
+    {% else %}
+    <section>
+    <h2 class="text-center">Click the scrape button above!</h2>
+    </section>
+
+    <!--footer-->
+    <footer style="position:absolute; bottom:0; text-align:center; background-color:grey; padding:15px; width:100%; color:white">
+        <div class="footer">
+            &copy; Copyright Alyssa Ma 2020
+        </div>
+    </footer>
+    {% endif %}
+
+</body>
+</html>
